@@ -1,0 +1,56 @@
+/* The only rule that matters */
+#video-background {
+/*  making the video fullscreen  */
+  position: fixed;
+  right: 0; 
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+  width: auto; 
+  height: auto;
+  z-index: -100;
+}
+
+.auth-body {
+  text-align: center;
+  margin-top: 25vh;
+}
+
+/*.mat-card-title-form {
+  margin: 5% 40% 3% 0;
+}*/
+
+.mat-toolbar-form {
+  padding-left: 15%;
+  margin-bottom: 5%;
+  height: 5vh;
+}
+
+.mat-card-form {
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.mat-card {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+
+
+/*.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}*/
+
+.example-full-width {
+  width: 70%;
+  height: 10vh;
+}
+
+.example-button-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

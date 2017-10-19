@@ -1,3 +1,90 @@
-<p>
-  authentication works!
-</p>
+<video autoplay loop id="video-background" muted plays-inline>
+  	<source src="assets/Symmetric-Traffic.mp4" type='video/mp4; codecs="h.264"' >      
+    <source src="assets/Symmetric-Traffic.webm" type="video/webm">
+    <source src="assets/Symmetric-Traffic.ogv" type="video/ogv">   
+</video>
+<!-- Alert Box for successful account creation  -->
+<div class="alert alert-success alert-dismissable animated fadeInDown" *ngIf="success_msg" style="margin:3%">
+    <a href="#" class="close" data-dismiss="alert" (click)="close_success_msg()">×</a>
+    <strong>Success !!! </strong> Account created Successfully. Please login to send messages to your Friends and Family ...
+</div>
+<!-- Alert Box for any error  -->
+<div class="alert alert-danger alert-dismissable animated tada" *ngIf="error_msg" style="margin:3%">
+    <a href="#" class="close" data-dismiss="alert" (click)="close_error_msg()">×</a>
+    <li *ngFor="let msg of main_error_msg; let i = index "> 
+	    <strong>Error !!! </strong>  {{ msg }}
+	</li>
+</div>
+
+<div class="container auth-body">
+	<!-- Login Form -->
+	<form *ngIf="signin" class="example-form animated bounce" (ngSubmit)="onLogin(login)" #login="ngForm">
+	  	<mat-card class="mat-card-form">
+	  		<mat-toolbar class="mat-toolbar-form" color="primary">{{ title }}</mat-toolbar>
+
+	  		<!-- <mat-card-title class="mat-card-title-form">Please Login </mat-card-title> -->
+		  	<table class="example-full-width" cellspacing="0">
+			  	<tr>
+				    <mat-form-field class="example-full-width">
+				      <input name="username" matInput ngModel placeholder="Username" required>
+				    </mat-form-field>
+			  	</tr>
+			  	<tr>
+				    <mat-form-field class="example-full-width">
+				      <input name="password" type="password" ngModel matInput placeholder="Password" required>
+				    </mat-form-field>
+			  	</tr>
+			  	<tr>
+			  		<mat-grid-list cols="2" rowHeight="2:1">
+			  			<mat-grid-tile>
+					  		<button type="submit" [disabled]="!login.valid" mat-raised-button color="primary">Sign In</button>
+					  	</mat-grid-tile>
+		  				<mat-grid-tile>
+						  	<button mat-button color="primary" (click)="show_signup_form()">Create an Account</button>
+						</mat-grid-tile>
+			  		</mat-grid-list>
+			  	</tr>
+		  	</table>
+	  	</mat-card>
+	</form>
+
+	<!-- Sign Up Form -->
+	<form *ngIf="register" class="example-form animated bounce" (ngSubmit)="onSignup(signup)" #signup="ngForm">
+	  	<mat-card class="mat-card-form">
+	  		<mat-toolbar class="mat-toolbar-form" color="primary">{{ title }}</mat-toolbar>
+	  		<table class="example-full-width" cellspacing="0">
+			  	<tr>
+				    <mat-form-field class="example-full-width">
+				      <input name="username" matInput ngModel placeholder="Username" required>
+				    </mat-form-field>
+			  	</tr>
+			  	<tr>
+			  		<mat-form-field class="example-full-width">
+					    <input [(ngModel)]="email" name="email" matInput placeholder="Email" [formControl]="emailFormControl">
+					    <mat-error *ngIf="emailFormControl.hasError('pattern')">
+					      Please enter a valid email address
+					    </mat-error>
+					    <mat-error *ngIf="emailFormControl.hasError('required')">
+					      Email is <strong>required</strong>
+					    </mat-error>
+					</mat-form-field>
+			  	</tr>
+			  	<tr>
+				    <mat-form-field class="example-full-width">
+				      <input name="password" type="password" ngModel matInput placeholder="Password" required>
+				    </mat-form-field>
+			  	</tr>
+			  	<tr>
+			  		<mat-grid-list cols="2" rowHeight="2:1">
+			  			<mat-grid-tile>
+					  		<button type="submit" [disabled]="!signup.valid || emailFormControl.hasError('pattern')" mat-raised-button color="primary">Register</button>
+					  	</mat-grid-tile>
+		  				<mat-grid-tile>
+						  	<button mat-button color="primary" (click)="show_signin_form()">sign in</button>
+						</mat-grid-tile>
+			  		</mat-grid-list>
+			  	</tr>
+		  	</table>
+	  	</mat-card>
+	</form>
+</div>

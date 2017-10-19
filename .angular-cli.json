@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "angular-messaging-service"
+    "name": "angular-messaging-service-web-app"
   },
   "apps": [
     {
@@ -19,7 +19,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/animate.css/animate.min.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
