@@ -1,0 +1,26 @@
+mat-card {
+	margin: 2%;
+}
+
+.mat-card {
+	padding: 0;
+}
+
+.pagination-style {
+	position: block; 
+	text-align: center; 
+	padding: 5px;
+}
+
+.conversation-delete-archived {
+	position: absolute;
+	right: 5%;
+}
+
+.msg-time-btn-class {
+	padding-top: 3%;
+	padding-left: 3%;
+	padding-right: 3%;
+	padding-bottom: 1%; 
+}
+

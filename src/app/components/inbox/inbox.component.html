@@ -1,3 +1,80 @@
-<p>
-  inbox works!
-</p>
+<!-- Alert Box for Archived and Delete a conversation  -->
+<div class="alert alert-success alert-dismissable animated fadeInDown" *ngIf="show_success_msg" style="margin:3%">
+    <a href="#" class="close" data-dismiss="alert" (click)="close_success_msg()">×</a>
+    <strong>Success !!! </strong> {{ success_msg }}
+</div>
+
+<!-- Pagination section -->
+<div class="button-row pagination-style">
+	<button mat-fab [disabled]="previous_page_disable" color="#e0e0e0" matTooltip="Previous Page" (click)="go_to_previous_page()">
+		<mat-icon class="example-icon">arrow_back</mat-icon>
+	</button>
+	<button mat-fab [disabled]="next_page_disable" color="#e0e0e0" matTooltip="Next Page" (click)="go_to_next_page()">
+		<mat-icon class="example-icon" color="#e0e0e0">arrow_forward</mat-icon>
+	</button>
+</div>
+
+
+<!-- Individual Conversation snippet -->
+<mat-card class="" *ngFor="let inbox of inboxes; let i = index " class="example-form animated fadeInUp">
+	<mat-toolbar class="" color="basic">
+		<div class="row">
+			<div class="col-xs-2">Subject :</div>
+			<div class="col-xs-2">
+				<div style="color: #3f51b5;" matTooltip="Subject"> 
+					&nbsp; {{ inbox.conversation_subject }}
+				</div>	
+			</div>
+			<div class="col-xs-5">
+				Conversation with : 
+			</div>
+			<div class="col-xs-3">
+				<div *ngIf="inbox.msg_receiver.username !==  username else other_content" style="color: #3f51b5;" matTooltip="Conversation with"> 
+					&nbsp; {{ inbox.msg_receiver.username }}
+				</div>
+				<ng-template #other_content>
+					<div style="color: #3f51b5;" matTooltip="Conversation with"> 
+						&nbsp; {{ inbox.msg_sender.username }}
+					</div>
+				</ng-template> 
+			</div>
+		</div>
+
+		<button mat-icon-button [matMenuTriggerFor]="menu" class="conversation-delete-archived">
+			<mat-icon>more_vert</mat-icon>
+		</button>
+		<mat-menu #menu="matMenu">
+			<div *ngIf="!archived_inbox">
+				<button mat-menu-item (click)="archived_conversation(inbox.archive_url)">
+					<mat-icon>dialpad</mat-icon>
+					<span>Archived</span>
+				</button>
+				<button mat-menu-item (click)="delete_conversation(inbox.delete_url)">
+					<mat-icon>notifications_off</mat-icon>
+					<span>Delete</span>
+				</button>
+			</div>
+			<div *ngIf="archived_inbox">
+				<button mat-menu-item (click)="un_archived_conversation(inbox.archive_url)">
+					<mat-icon>dialpad</mat-icon>
+					<span>Unarchived</span>
+				</button>
+			</div>
+		</mat-menu>				
+	</mat-toolbar>
+	
+  	<div class="msg-time-btn-class">
+		<mat-card-content>
+			<b matTooltip="Last Message of this conversation">
+				{{ inbox.message }}
+			</b>
+		</mat-card-content>
+		
+		<mat-card-actions style="padding-top: 3%">	
+			<mat-chip-list>
+				<button mat-raised-button color="accent" style="margin-right: 30%;" matTooltip="Click!" (click)="get_message(inbox.conversation_id, inbox.conversation_subject)">Get Messages of this Conversation</button>
+				<mat-chip matTooltip="Time">{{ inbox.timestamp }}</mat-chip>
+			</mat-chip-list>
+		</mat-card-actions>
+	</div>
+</mat-card>

@@ -16,7 +16,8 @@ import { AuthenticationComponent } from './components/authentication/authenticat
 import { MessagesComponent } from './components/messages/messages.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 
-import { MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatGridListModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatGridListModule, MatSidenavModule,
+        MatTooltipModule, MatIconModule, MatChipsModule, MatMenuModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,11 @@ import { MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, Mat
     MatButtonModule,
     MatToolbarModule,
     MatGridListModule,
+    MatSidenavModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatChipsModule,
+    MatMenuModule,
     routing,
   ],
   providers: [AuthService, MessageService, ConversationService],
