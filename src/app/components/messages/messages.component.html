@@ -45,6 +45,18 @@
 	</div>
 </div>
 
+<!-- Pagination arrows -->
+<div *ngIf="conversation_info.archived">
+	<div class="button-row pagination-style">
+		<button mat-fab [disabled]="previous_page_disable" color="#e0e0e0" matTooltip="Previous Page" (click)="go_to_previous_page()">
+			<mat-icon class="example-icon">arrow_back</mat-icon>
+		</button>
+		<button mat-fab [disabled]="next_page_disable" color="#e0e0e0" matTooltip="Next Page" (click)="go_to_next_page()">
+			<mat-icon class="example-icon" color="#e0e0e0">arrow_forward</mat-icon>
+		</button>
+	</div>
+</div>
+
 <!-- Message Section -->
 <mat-card class="" *ngFor="let message of messages; let i = index " class="example-form animated fadeInUp">
 	<!-- Message Header -->
