@@ -1,3 +1,82 @@
-<p>
-  messages works!
-</p>
+<!-- Aert Box for successful message creation -->
+<div class="alert alert-success alert-dismissable animated fadeInDown" *ngIf="success_msg" style="margin:3%">
+    <a href="#" class="close" data-dismiss="alert" (click)="close_success_msg()">×</a>
+    <strong>Success !!! </strong> Message is send to {{ conversation_with }}
+</div>
+
+<!-- Verifying whether the message is archived or not. Only unarchived messages are shown -->
+<div class="row" *ngIf="!conversation_info.archived">
+	<div class="col-md-10">
+		<!-- Message creation Form -->
+		<form (ngSubmit)="send_message(sendMessage)" #sendMessage="ngForm">
+			<div class="row">
+				<div class="col-md-10">
+					<mat-form-field class="example-full-width container">
+					    <textarea name="message" matInput ngModel placeholder="Message @{{ conversation_with }}" [(ngModel)]="message"></textarea>
+					</mat-form-field>
+				</div>
+				<div class="col-md-2" style="padding-top: 2%">
+					<button type="submit" mat-fab [disabled]="sendMessage.value.message =='' || message==null"  matTooltip="Send" color="primary" >
+						<mat-icon class="example-icon" >send</mat-icon>
+					</button>
+				</div>
+			</div>
+			<div class="row upload-file-div" matTooltip="Send Image">
+				<div class="col-md-2">
+					<b>Upload Image:</b>
+				</div>
+				<div class="col-md-4">
+					<input type="file" id="image" name="image" (change)="handleImageFileSelect($event)" #imageFile>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- Pagination arrows -->
+	<div class="col-md-2" style="padding-top: 1%">
+		<div class="button-row pagination-style">
+			<button mat-fab [disabled]="previous_page_disable" color="#e0e0e0" matTooltip="Previous Page" (click)="go_to_previous_page()">
+				<mat-icon class="example-icon">arrow_back</mat-icon>
+			</button>
+			<button mat-fab [disabled]="next_page_disable" color="#e0e0e0" matTooltip="Next Page" (click)="go_to_next_page()">
+				<mat-icon class="example-icon" color="#e0e0e0">arrow_forward</mat-icon>
+			</button>
+		</div>
+	</div>
+</div>
+
+<!-- Message Section -->
+<mat-card class="" *ngFor="let message of messages; let i = index " class="example-form animated fadeInUp">
+	<!-- Message Header -->
+	<mat-toolbar class="" color="basic">
+		Subject: <div style="color: #3f51b5;" matTooltip="Subject"> 
+					&nbsp; {{ conversation_info.conversation_subject }}
+				</div>, &nbsp;
+		Conversation with : 
+				<div *ngIf="message.msg_receiver.username !==  username else other_content" style="color: #3f51b5;" matTooltip="Conversation with"> 
+					&nbsp; {{ message.msg_receiver.username }}
+				</div>
+				<ng-template #other_content>
+					<div style="color: #3f51b5;" matTooltip="Conversation with"> 
+						&nbsp; {{ message.msg_sender.username }}
+					</div>
+				</ng-template>
+	</mat-toolbar>
+	
+	<!-- Message Body -->
+  	<div class="msg-time-btn-class">
+		<!-- Main message -->
+		<mat-card-content>
+			<div *ngIf="message.image !== null">
+				<img mat-card-image src="{{ message.image }}">
+			</div>
+			<b matTooltip="Main Message"> {{ message.message }} </b>
+		</mat-card-content>
+		<!-- Timestamp of the message -->
+		<mat-card-actions style="padding-top: 3%">	
+			<mat-chip-list>
+				<mat-chip matTooltip="Time"> {{ message.timestamp }} </mat-chip>
+			</mat-chip-list>
+		</mat-card-actions>
+	</div>
+</mat-card>

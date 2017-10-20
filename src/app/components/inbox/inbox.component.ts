@@ -28,7 +28,7 @@ export class InboxComponent implements OnInit {
   show_success_msg:boolean = false;
   success_msg:string;
 
-  constructor(private conversationService:ConversationService, private authService:AuthService) { }
+  	constructor(private conversationService:ConversationService, private authService:AuthService) { }
 
 	ngOnInit() {
 		this.root_url = this.authService.get_root_url();
@@ -46,6 +46,7 @@ export class InboxComponent implements OnInit {
 	      	this.reset_page();
 	  	});
 	}
+
 	un_archived_conversation(archive_url:string) {
 		this.conversationService.archiveCoversation(archive_url, this.token, false).subscribe((response) => {
 		    this.show_success_msg = true;
@@ -53,6 +54,7 @@ export class InboxComponent implements OnInit {
 		    this.reset_page();
 		});
 	}
+
 	delete_conversation(delete_url:string) {
 	  	this.conversationService.deleteCoversation(delete_url, this.token).subscribe((response) => {
 	      	this.show_success_msg = true;
@@ -60,6 +62,7 @@ export class InboxComponent implements OnInit {
 	      	this.reset_page();
 	  	});  
 	}
+	
 	go_to_next_page() {
 	  	this.conversationService.getInboxes(this.next_page_url, this.token).subscribe((inboxes) => {
 	    	this.common_operation(inboxes);
@@ -100,6 +103,15 @@ export class InboxComponent implements OnInit {
 	    this.conversationService.getInboxes(this.root_url + this.inbox_url + '&username=' + this.username +'&archived='+ this.archived_inbox, this.token).subscribe((inboxes) => {
 	        this.common_operation(inboxes);
 	    });
+  	}
+
+  	get_message(conversation_id: string, conversation_subject: string) {
+	    let conversation_info:ConversationInfo = {
+			conversation_id: conversation_id,
+			conversation_subject: conversation_subject,
+			archived: this.archived_inbox
+	    };
+    	this.conversation_info.emit(conversation_info);
   	}  	
 
 }

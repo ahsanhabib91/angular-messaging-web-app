@@ -17,6 +17,7 @@
 
 <!-- Individual Conversation snippet -->
 <mat-card class="" *ngFor="let inbox of inboxes; let i = index " class="example-form animated fadeInUp">
+	<!-- Conversation Header -->
 	<mat-toolbar class="" color="basic">
 		<div class="row">
 			<div class="col-xs-2">Subject :</div>
@@ -63,13 +64,16 @@
 		</mat-menu>				
 	</mat-toolbar>
 	
+	<!-- Main Conversation Body -->
   	<div class="msg-time-btn-class">
+		<!-- Last message of this Conversation thread -->
 		<mat-card-content>
 			<b matTooltip="Last Message of this conversation">
 				{{ inbox.message }}
 			</b>
 		</mat-card-content>
-		
+
+		<!-- Retrieve all messages of a conversation and timestamp of the last message sent to this converation -->
 		<mat-card-actions style="padding-top: 3%">	
 			<mat-chip-list>
 				<button mat-raised-button color="accent" style="margin-right: 30%;" matTooltip="Click!" (click)="get_message(inbox.conversation_id, inbox.conversation_subject)">Get Messages of this Conversation</button>
