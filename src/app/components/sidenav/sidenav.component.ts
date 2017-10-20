@@ -29,8 +29,6 @@ export class SidenavComponent implements OnInit {
   }
 
   get_messages(conversation_info: ConversationInfo):void {
-    console.log("Sidenav");
-    console.log(conversation_info);
     this.inbox = false;
     this.compose = false;
     this.archived_inbox = false;

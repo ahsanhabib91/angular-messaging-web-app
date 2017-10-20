@@ -1,3 +1,47 @@
-<p>
-  compose works!
-</p>
+<!-- Error Alert -->
+<div class="alert alert-danger alert-dismissable animated tada" *ngIf="error_msg" style="margin:3%">
+    <a href="#" class="close" data-dismiss="alert" (click)="close_error_msg()">×</a>
+    <strong>Error !!! </strong> You should type a valid username and avoid your own name as a receiver
+</div>
+<!-- Successful message creation Alert -->
+<div class="alert alert-success alert-dismissable animated fadeInDown" *ngIf="success_msg" style="margin:3%">
+    <a href="#" class="close" data-dismiss="alert" (click)="close_success_msg()">×</a>
+    <strong>Success !!! </strong> A New Conversation Created.
+</div>
+
+<!-- Message creation form -->
+<form class="example-form container" (ngSubmit)="send_conversation(sendConversation)" #sendConversation="ngForm">
+	<!-- AutoComplete form-field -->
+	<mat-form-field class="example-full-width">
+		<input ngModel matInput placeholder="type @username" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl" (click)="get_all_users()">
+		<mat-autocomplete #auto="matAutocomplete">
+			<mat-option *ngFor="let user of filteredUsers | async" [value]="user.username">
+				<span>username : {{ user.username }}</span> |
+				<small>email : {{user.email}}</small>
+			</mat-option>
+		</mat-autocomplete>
+	</mat-form-field>
+	
+	<mat-form-field class="example-full-width" >
+		<input name="conversation_subject" matInput ngModel placeholder="Subject" [(ngModel)]="conversation_subject">
+	</mat-form-field>
+
+	<mat-form-field class="example-full-width">
+		<textarea name="message" matInput ngModel placeholder="Write your message" [(ngModel)]="message"></textarea>
+	</mat-form-field>
+
+	<div class="row upload-file-div">
+		<div class="col-md-2">
+		<b>Upload Image File:</b>
+		</div>
+		<div class="col-md-6">
+		<input type="file" id="image" name="image" (change)="handleImageFileSelect($event)" #imageFile>
+		</div>
+	</div>
+
+	<button type="submit" mat-raised-button class="btn-compose"
+		[disabled]=" sendConversation.value.message =='' || sendConversation.value.conversation_subject =='' || receiver_valid==false || message==null || conversation_subject==null"  
+		mdTooltip="Send" color="primary">
+		<mat-icon class="example-icon" >send</mat-icon>
+	</button>
+</form>

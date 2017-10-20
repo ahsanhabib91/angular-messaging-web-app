@@ -102,13 +102,12 @@ export class AuthService implements CanActivate {
     }
 
     signin(username:string, password: string) {
-          console.log(username + " " + password);
           this.username = username;
           let myheaders = new Headers();
           myheaders.append('Content-Type', 'application/json');
           myheaders.append('X-Requested-With', 'XMLHttpRequest');
           myheaders.append('Accept', 'application/json');
-          // myheaders.append('access-control-allow-headers', 'x-xsrf-token');
+          
           //     /api/auth/token/
           //     /api/users/login/
           return this.http.post(this.root_url + this.login_address,
@@ -128,20 +127,19 @@ export class AuthService implements CanActivate {
           );
   	}
 
-  getUsers(user_list_url:string, token:string): Observable<any> {
-      console.log(user_list_url);
-      let myheaders = new Headers();
-      let jwt_token = 'JWT ' + token;
-      myheaders.append('X-Requested-With', 'XMLHttpRequest');
-      myheaders.append('Accept', 'application/json');
-      myheaders.append('Content-Type', 'application/json');
-      myheaders.append('Authorization', jwt_token);
-      return this.http.get( user_list_url, {
-        headers: myheaders
-      })
-      .map((res) => {
-        return res.json();
-      });
-  }
+    getUsers(user_list_url:string, token:string): Observable<any> {
+        let myheaders = new Headers();
+        let jwt_token = 'JWT ' + token;
+        myheaders.append('X-Requested-With', 'XMLHttpRequest');
+        myheaders.append('Accept', 'application/json');
+        myheaders.append('Content-Type', 'application/json');
+        myheaders.append('Authorization', jwt_token);
+        return this.http.get( user_list_url, {
+            headers: myheaders
+        })
+        .map((res) => {
+            return res.json();
+        });
+    }
 
 }

@@ -28,6 +28,25 @@ export class ConversationService {
 		});
   	}
 
+	create_conversation(converastion_create_url:string, conversation_data, token:string): Observable<any> {
+		let myheaders = this.create_header(token);
+		return this.http.post(converastion_create_url,
+		{
+			msg_sender: conversation_data.msg_sender,
+			msg_receiver: conversation_data.msg_receiver,
+			message: conversation_data.message,
+			image:  conversation_data.image,
+			conversation_id: conversation_data.conversation_subject,
+			conversation_subject: conversation_data.conversation_subject
+		},
+		{
+			headers: myheaders
+		})
+		.map((res) => {
+			return res.json();
+		});
+	}
+
   	archiveCoversation(archive_url: string, token: string, archived:boolean) {
         let myheaders = this.create_header(token);
         return this.http.put(archive_url,

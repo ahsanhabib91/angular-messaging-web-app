@@ -44,9 +44,9 @@
             <app-inbox [username]="username" [archived_inbox]="archived_inbox" (conversation_info)="get_messages($event)"></app-inbox>
         </div>
         
-        <!-- <div *ngIf="compose">
+        <div *ngIf="compose">
             <app-compose></app-compose>
-        </div> -->
+        </div>
 
         <div *ngIf="messages">
             <app-messages [conversation_info]="conversation_info" [username]="username"></app-messages>

@@ -17,7 +17,7 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 import { MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatGridListModule, MatSidenavModule,
-        MatTooltipModule, MatIconModule, MatChipsModule, MatMenuModule } from '@angular/material';
+        MatTooltipModule, MatIconModule, MatChipsModule, MatMenuModule, MatAutocompleteModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -45,6 +45,7 @@ import { MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, Mat
     MatIconModule,
     MatChipsModule,
     MatMenuModule,
+    MatAutocompleteModule,
     routing,
   ],
   providers: [AuthService, MessageService, ConversationService],
