@@ -4,8 +4,14 @@
     <strong>Success !!! </strong> {{ success_msg }}
 </div>
 
+<!-- If there is no user than this message will be shown ... -->
+<div class="alert alert-warning alert-dismissable animated zoomInUp" *ngIf="conversation_empty" style="margin:3%">
+    <strong>Sorry !!! </strong> 
+    No Converation or messages available for this page ...
+</div>
+
 <!-- Pagination section -->
-<div class="button-row pagination-style">
+<div class="button-row pagination-style" *ngIf="!conversation_empty">
 	<button mat-fab [disabled]="previous_page_disable" color="#e0e0e0" matTooltip="Previous Page" (click)="go_to_previous_page()">
 		<mat-icon class="example-icon">arrow_back</mat-icon>
 	</button>

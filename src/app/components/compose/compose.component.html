@@ -10,7 +10,7 @@
 </div>
 
 <!-- Message creation form -->
-<form class="example-form container" (ngSubmit)="send_conversation(sendConversation)" #sendConversation="ngForm">
+<form class="example-form container" (ngSubmit)="send_conversation(sendConversation)" #sendConversation="ngForm" *ngIf="!user_empty">
 	<!-- AutoComplete form-field -->
 	<mat-form-field class="example-full-width">
 		<input ngModel matInput placeholder="type @username" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl" (click)="get_all_users()">
@@ -45,3 +45,9 @@
 		<mat-icon class="example-icon" >send</mat-icon>
 	</button>
 </form>
+
+<!-- If there is no user than this message will be shown ... -->
+<div class="alert alert-info alert-dismissable animated fadeInDown" *ngIf="user_empty" style="margin:3%">
+    <strong>Sorry !!! </strong> 
+    No user is available except you. If user other than you registered to this website, only then you can send personal message and your favourite photos to them.
+</div>

@@ -27,6 +27,7 @@ export class ComposeComponent implements OnInit {
   error_msg:boolean =false;
   success_msg:boolean =false;
   receiver_valid:boolean = false;
+  user_empty:boolean = false;
   
   users:any[] = [];
   token:string;
@@ -39,7 +40,12 @@ export class ComposeComponent implements OnInit {
 		this.username = this.authService.getUsername();
 		this.authService.getUsers(this.root_url + this.user_list_url + '?username=' + this.username , this.token)
 		.subscribe((users) => {
-			this.users = users;
+			if (users.length != 0) {
+				this.users = users;
+			}
+			else {
+				this.user_empty = true;
+			}
 		});
 		
 		this.stateCtrl = new FormControl();
@@ -95,6 +101,7 @@ export class ComposeComponent implements OnInit {
 		this.base64textString= btoa(binaryString);
 	}
 
+	/* Create Conversation handler */
 	send_conversation(form: NgForm) {
 		let conversation_data = {
 			msg_sender: this.username,

@@ -26,6 +26,7 @@ export class InboxComponent implements OnInit {
   token:string;
 
   show_success_msg:boolean = false;
+  conversation_empty:boolean = true;
   success_msg:string;
 
   	constructor(private conversationService:ConversationService, private authService:AuthService) { }
@@ -35,7 +36,13 @@ export class InboxComponent implements OnInit {
 		this.token = this.authService.getToken();
 		this.conversationService.getInboxes(this.root_url + this.inbox_url + '&username=' + this.username +'&archived='+ this.archived_inbox, this.token)
 		.subscribe((inboxes) => {
-	    	this.common_operation(inboxes);
+			if (inboxes.count != 0) {
+				this.conversation_empty = false;
+				this.common_operation(inboxes);
+			}
+	    	else {
+	    		this.conversation_empty = true;
+	    	}
 		});
 	}
 
@@ -100,8 +107,15 @@ export class InboxComponent implements OnInit {
     }
 
   	reset_page() {
-	    this.conversationService.getInboxes(this.root_url + this.inbox_url + '&username=' + this.username +'&archived='+ this.archived_inbox, this.token).subscribe((inboxes) => {
-	        this.common_operation(inboxes);
+	    this.conversationService.getInboxes(this.root_url + this.inbox_url + '&username=' + this.username +'&archived='+ this.archived_inbox, this.token)
+	    .subscribe((inboxes) => {
+	        if (inboxes.count != 0) {
+				this.conversation_empty = false;
+			}
+	    	else {
+	    		this.conversation_empty = true;
+	    	}
+	    	this.common_operation(inboxes);
 	    });
   	}
 
