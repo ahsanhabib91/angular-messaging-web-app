@@ -47,7 +47,14 @@ export class AuthenticationComponent implements OnInit {
                 this.router.navigate(['']);
             },
             error => {
-                console.log(error);
+                let validation_error = error.json();
+                console.log(validation_error);
+				let errors = [];
+				if (validation_error.non_field_errors) {
+					errors.push(validation_error.non_field_errors[0]);
+				}
+				this.main_error_msg = errors;
+				this.error_msg = true;
             });
     }
 
@@ -60,7 +67,6 @@ export class AuthenticationComponent implements OnInit {
           this.signin = true;
           this.register = false;
           this.email = "";
-          // this.router.navigate(['/authentication']);
         },
         (error) => {
           let validation_error = error.json();

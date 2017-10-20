@@ -21,9 +21,7 @@
 	<form *ngIf="signin" class="example-form animated bounce" (ngSubmit)="onLogin(login)" #login="ngForm">
 	  	<mat-card class="mat-card-form">
 	  		<mat-toolbar class="mat-toolbar-form" color="primary">{{ title }}</mat-toolbar>
-
-	  		<!-- <mat-card-title class="mat-card-title-form">Please Login </mat-card-title> -->
-		  	<table class="example-full-width" cellspacing="0">
+			<table class="example-full-width" cellspacing="0">
 			  	<tr>
 				    <mat-form-field class="example-full-width">
 				      <input name="username" matInput ngModel placeholder="Username" required>
@@ -35,14 +33,14 @@
 				    </mat-form-field>
 			  	</tr>
 			  	<tr>
-			  		<mat-grid-list cols="2" rowHeight="2:1">
-			  			<mat-grid-tile>
-					  		<button type="submit" [disabled]="!login.valid" mat-raised-button color="primary">Sign In</button>
-					  	</mat-grid-tile>
-		  				<mat-grid-tile>
-						  	<button mat-button color="primary" (click)="show_signup_form()">Create an Account</button>
-						</mat-grid-tile>
-			  		</mat-grid-list>
+			  		<div class="col-sm-3"></div>
+			  		<div class="col-sm-3">
+			  			<button type="submit" [disabled]="!login.valid" mat-raised-button color="primary">Sign In</button>
+			  		</div>
+			  		<div class="col-sm-3">
+			  			<button mat-button color="primary" (click)="show_signup_form()">Create an Account</button>
+			  		</div>
+			  		<div class="col-sm-3"></div>
 			  	</tr>
 		  	</table>
 	  	</mat-card>
@@ -75,14 +73,14 @@
 				    </mat-form-field>
 			  	</tr>
 			  	<tr>
-			  		<mat-grid-list cols="2" rowHeight="2:1">
-			  			<mat-grid-tile>
-					  		<button type="submit" [disabled]="!signup.valid || emailFormControl.hasError('pattern')" mat-raised-button color="primary">Register</button>
-					  	</mat-grid-tile>
-		  				<mat-grid-tile>
-						  	<button mat-button color="primary" (click)="show_signin_form()">sign in</button>
-						</mat-grid-tile>
-			  		</mat-grid-list>
+			  		<div class="col-sm-3"></div>
+			  		<div class="col-sm-3">
+			  			<button type="submit" [disabled]="!signup.valid || emailFormControl.hasError('pattern')" mat-raised-button color="primary">Register</button>
+			  		</div>
+			  		<div class="col-sm-3">
+			  			<button mat-button color="primary" (click)="show_signin_form()">sign in</button>
+			  		</div>
+			  		<div class="col-sm-3"></div>
 			  	</tr>
 		  	</table>
 	  	</mat-card>
