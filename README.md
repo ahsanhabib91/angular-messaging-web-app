@@ -1,4 +1,4 @@
-# Django Messaging Web App
+# Angular Messaging Web App
 
 This is a reusable Angular project that can handle private messages between Users implemented with `Angular 4`, `Material UI` and `Bootstrap`. The back-end of this project is implement with `Python 3`, `Django Rest Framework` and `PostgreSQL` which can be found in this [repository](https://github.com/ahsanhabib91/django-messaging-web-app).
 
