@@ -1,27 +1,22 @@
-# AngularMessagingService
+# Django Messaging Web App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.8.
+This is a reusable Angular project that can handle private messages between Users implemented with `Angular 4`, `Material UI` and `Bootstrap`. The back-end of this project is implement with `Python 3`, `Django Rest Framework` and `PostgreSQL` which can be found in this [repository](https://github.com/ahsanhabib91/django-messaging-web-app).
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+*  	User `Registration`.
+*  	User `Login` and `Logout`.
+*  	A User is allowed to have different Conversations with another User.
+*  	A User can `Archive` a Conversation.
+*  	A User can `Delete` a Conversation.
+*  	User can see `sorted Conversation list` where his last Conversation shows up with `timestamp`.
+*  	User can see `message list` with `timestamp` related to a particular `Conversation` sorted by `timestamp`.
+*	User can send `messages` and `photos` to another User and maintaina a seperate `Conversation thread`.
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+*	`git clone https://github.com/ahsanhabib91/angular-messaging-web-app.git`.
+*	`cd angular-messaging-web-app`.
+*	`npm install`.
+*	Please, update `angular-messaging-web-app/src/app/services/auth.service.ts` file with proper `Ip address` and `port number` of back-end.
+*	`ng serve`.
