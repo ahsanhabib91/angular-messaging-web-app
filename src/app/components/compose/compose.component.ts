@@ -20,17 +20,17 @@ export class ComposeComponent implements OnInit {
   @ViewChild('imageFile')
   imageFileVariable: any;
 
-  username: string;
-  receiver_name: string;
-  message:string=null;
-  conversation_subject:string=null;
-  error_msg:boolean =false;
-  success_msg:boolean =false;
-  receiver_valid:boolean = false;
-  user_empty:boolean = false;
+  username: string;						/* @string [username]	*/
+  receiver_name: string;				/* @string [receiver's username] */
+  message:string=null;					/* @string [the main message] */
+  conversation_subject:string=null;		/* conversation subject */
+  error_msg:boolean =false;				/* @boobean [to show the error message] */
+  success_msg:boolean =false;			/* @boobean [to show the success message] */
+  receiver_valid:boolean = false;		/* @boobean [to check whether the correect receiver has inserted] */
+  user_empty:boolean = false;			/* @boobean [to check whether there is any receiver or not] */
   
-  users:any[] = [];
-  token:string;
+  users:any[] = [];						/* @receiver [list of receiver object] */
+  token:string;							/* @string [user authentication token]	*/
 
 	constructor(private conversationService:ConversationService, private authService:AuthService) { }
 
@@ -38,6 +38,12 @@ export class ComposeComponent implements OnInit {
 		this.root_url = this.authService.get_root_url();
 		this.token = this.authService.getToken();
 		this.username = this.authService.getUsername();
+		
+		/**
+		 * [getUsers get all the available receivers]
+		 * @param {[type]} this.root_url + this.user_list_url + '?username=' + this.username [GET request URL for getting all receivers]
+		 * @param {[type]} this.token    [user validity token]
+		 */
 		this.authService.getUsers(this.root_url + this.user_list_url + '?username=' + this.username , this.token)
 		.subscribe((users) => {
 			if (users.length != 0) {
@@ -70,7 +76,8 @@ export class ComposeComponent implements OnInit {
       return this.users.filter(user =>
         user.username.toLowerCase().indexOf(username.toLowerCase()) === 0);
     }
-  
+  	
+  	
 	get_all_users() {
 		this.stateCtrl = new FormControl();
 		this.filteredUsers = this.stateCtrl.valueChanges
